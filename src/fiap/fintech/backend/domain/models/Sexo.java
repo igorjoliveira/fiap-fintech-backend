@@ -5,10 +5,10 @@ public enum Sexo{
     Feminino;
 
     public static Sexo Converter(int item){
-        switch (item){
-            case 0: return Sexo.Masculino;
-            case 1: return Sexo.Feminino;
-            default: return null;
-        }
+        return switch (item) {
+            case 1 -> Sexo.Masculino;
+            case 2 -> Sexo.Feminino;
+            default -> null;
+        };
     }
 }

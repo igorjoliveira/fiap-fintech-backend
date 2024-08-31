@@ -5,10 +5,10 @@ public enum Autenticador {
     Externo;
 
     public static Autenticador Converter(int item){
-        switch (item){
-            case 0: return Autenticador.Interno;
-            case 1: return Autenticador.Externo;
-            default: return null;
-        }
+        return switch (item) {
+            case 1 -> Autenticador.Interno;
+            case 2 -> Autenticador.Externo;
+            default -> null;
+        };
     }
 }

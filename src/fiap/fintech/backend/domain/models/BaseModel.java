@@ -12,11 +12,11 @@ public abstract class BaseModel{
     private LocalDateTime dataHoraAtualizacao;
 
     public BaseModel() {
-        this.codigo = setCodigo();
+        this.setCodigo((new Random().nextInt(100)) + 1);
     }
 
     public int getCodigo() { return this.codigo; }
-    protected int setCodigo() { return (new Random().nextInt(100)) + 1; }
+    protected void setCodigo(int codigo) { this.codigo = codigo; }
     public LocalDateTime getDataHoraCadastro() { return dataHoraCadastro; }
     public LocalDateTime getDataHoraAtualizacao() { return dataHoraAtualizacao; }
     public void setDataHoraCadastro(LocalDateTime dataHoraCadastro) { this.dataHoraCadastro = dataHoraCadastro; }
