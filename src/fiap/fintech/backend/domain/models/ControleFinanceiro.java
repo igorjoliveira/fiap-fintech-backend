@@ -1,6 +1,7 @@
 package fiap.fintech.backend.domain.models;
 
 import fiap.fintech.backend.domain.common.EntradaDadoInvalidaException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -10,7 +11,7 @@ public class ControleFinanceiro extends BaseModel {
     private int codigoProprietario;
     private String descricao;
     private Boolean ativo;
-    private List<ParticipanteControleFinanceiro> participanteLista;
+    private List<Participante> participanteLista;
 
     private ControleFinanceiro(){
         super();
@@ -29,7 +30,7 @@ public class ControleFinanceiro extends BaseModel {
         return descricao;
     }
     public int getCodigoProprietario() { return codigoProprietario; }
-    public List<ParticipanteControleFinanceiro> getParticipanteLista() { return participanteLista; }
+    public List<Participante> getParticipanteLista() { return participanteLista; }
 
     public ControleFinanceiro adicionarParticipante(int codigoUsuario) throws EntradaDadoInvalidaException {
         for (var participante : this.participanteLista){
@@ -38,10 +39,10 @@ public class ControleFinanceiro extends BaseModel {
             }
         }
 
-        participanteLista.add(new ParticipanteControleFinanceiro(codigoUsuario, this.getCodigo(), true));
+        participanteLista.add(new Participante(codigoUsuario, this.getCodigo(), true));
         return this;
     }
-    public ParticipanteControleFinanceiro obterParticipante(int codigoUsuario) throws EntradaDadoInvalidaException {
+    public Participante obterParticipante(int codigoUsuario) throws EntradaDadoInvalidaException {
         for (var item : this.participanteLista){
             if(item.getCodigoUsuario() == codigoUsuario)
                 return item;
@@ -57,6 +58,7 @@ public class ControleFinanceiro extends BaseModel {
 
         return mensagem.toString();
     }
+
     @Override
     public Dictionary<Integer, String> getAcoes() {
         var data = new Hashtable<Integer, String>();

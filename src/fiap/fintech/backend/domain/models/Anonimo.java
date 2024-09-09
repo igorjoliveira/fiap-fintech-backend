@@ -3,7 +3,7 @@ package fiap.fintech.backend.domain.models;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-public class Anonimo extends BaseModel{
+public class Anonimo extends BaseModel {
     @Override
     public Dictionary<Integer, String> getAcoes() {
         var data = new Hashtable<Integer, String>();

@@ -1,5 +1,7 @@
 package fiap.fintech.backend.domain.models;
 
+import fiap.fintech.backend.domain.models.enums.TipoPagamento;
+
 import java.util.Dictionary;
 
 public abstract class FormaPagamento extends BaseModel {

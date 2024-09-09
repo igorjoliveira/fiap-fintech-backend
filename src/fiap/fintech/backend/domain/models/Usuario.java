@@ -1,6 +1,9 @@
 package fiap.fintech.backend.domain.models;
 
 import fiap.fintech.backend.domain.common.EntradaDadoInvalidaException;
+import fiap.fintech.backend.domain.models.enums.Autenticador;
+import fiap.fintech.backend.domain.models.enums.Sexo;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

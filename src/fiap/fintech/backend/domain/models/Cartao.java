@@ -1,15 +1,16 @@
 package fiap.fintech.backend.domain.models;
 
-import java.time.LocalDateTime;
+import fiap.fintech.backend.domain.models.enums.TipoPagamento;
 
-public class Cartao extends FormaPagamento {
+import java.time.LocalDateTime;
+import java.util.Dictionary;
+import java.util.Hashtable;
+
+public abstract class Cartao extends FormaPagamento {
 
     private String numero;
     private String nome;
     private String dataVencimento;
-    private String codigoSeguranca;
-    private char tipoCartao;
-    private double valorLimite;
 
     public String getNumero() {
         return numero;
@@ -20,28 +21,25 @@ public class Cartao extends FormaPagamento {
     public String getDataVencimento() {
         return dataVencimento;
     }
-    public String getCodigoSeguranca() {
-        return codigoSeguranca;
-    }
-    public char getTipoCartao() {
-        return tipoCartao;
-    }
 
-    public Cartao(int codigoCateiraDigital, String numero, String nome, String dataVencimento, String codigoSeguranca, char tipoCartao) {
+    public abstract char getTipoCartao();
+
+    public Cartao(int codigoCateiraDigital, String numero, String nome, String dataVencimento) {
         super(codigoCateiraDigital, TipoPagamento.Cartao);
 
         this.numero = numero;
         this.nome = nome;
         this.dataVencimento = dataVencimento;
-        this.codigoSeguranca = codigoSeguranca;
-        this.tipoCartao = tipoCartao;
         this.setDataHoraCadastro(LocalDateTime.now());
     }
 
-    public Cartao adicionarLimiteCredito(double valorLimite){
-        if(this.tipoCartao == 'C')
-            this.valorLimite = valorLimite;
+    @Override
+    public Dictionary<Integer, String> getAcoes() {
+        var data = new Hashtable<Integer, String>();
+        data.put(1, "Adicionar Cartão de crédito");
+        data.put(2, "Adicionar Conta de débito");
+        data.put(99, "Voltar");
 
-        return this;
+        return data;
     }
 }

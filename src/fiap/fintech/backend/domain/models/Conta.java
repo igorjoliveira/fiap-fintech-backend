@@ -1,10 +1,15 @@
 package fiap.fintech.backend.domain.models;
 
-public class Conta extends FormaPagamento {
+import fiap.fintech.backend.domain.models.enums.TipoPagamento;
+
+import java.util.Dictionary;
+import java.util.Hashtable;
+
+public abstract class Conta extends FormaPagamento {
 
     private String agencia;
     private String numero;
-    private char tipo;
+    private char digito;
 
     public String getAgencia() {
         return agencia;
@@ -12,15 +17,28 @@ public class Conta extends FormaPagamento {
     public String getNumero() {
         return numero;
     }
-    public char getTipo() {
-        return tipo;
+
+    public char getDigito() {
+        return digito;
     }
 
-    public Conta(int codigoCateiraDigital, String agencia, String numero, char tipo) {
+    public abstract char getTipo();
+
+    public Conta(int codigoCateiraDigital, String agencia, String numero, char digito) {
         super(codigoCateiraDigital, TipoPagamento.Transferencia);
 
         this.agencia = agencia;
         this.numero = numero;
-        this.tipo = tipo;
+        this.digito = digito;
+    }
+
+    @Override
+    public Dictionary<Integer, String> getAcoes() {
+        var data = new Hashtable<Integer, String>();
+        data.put(1, "Adicionar Conta corrente");
+        data.put(2, "Adicionar Conta poupança");
+        data.put(99, "Voltar");
+
+        return data;
     }
 }

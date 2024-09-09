@@ -1,22 +1,29 @@
 package fiap.fintech.backend.domain.models;
 
+import fiap.fintech.backend.domain.models.enums.InstituicaoFinanceira;
+import fiap.fintech.backend.domain.models.enums.TipoRenda;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.List;
 
-public class ParticipanteControleFinanceiro extends BaseModel {
+public class Participante extends BaseModel {
     private int codigoUsuario;
     private int codigoControleFinanceiro;
     private Boolean ativo;
     private List<Renda> rendaLista;
+    private List<Despesa> despesaLista;
+    private List<CarteiraDigital> carteiraDigitalLista;
 
-    private ParticipanteControleFinanceiro(){
+    private Participante(){
         super();
         this.rendaLista = new ArrayList<>();
+        this.despesaLista = new ArrayList<>();
+        this.carteiraDigitalLista = new ArrayList<>();
     }
-    public ParticipanteControleFinanceiro(int codigoUsuario, int codigoControleFinanceiro, Boolean ativo) {
+    public Participante(int codigoUsuario, int codigoControleFinanceiro, Boolean ativo) {
         this();
         this.codigoUsuario = codigoUsuario;
         this.codigoControleFinanceiro = codigoControleFinanceiro;
@@ -29,15 +36,21 @@ public class ParticipanteControleFinanceiro extends BaseModel {
     public Boolean getAtivo() { return ativo; }
     public List<Renda> getRendaLista() { return rendaLista; }
 
-    public ParticipanteControleFinanceiro setAtivo(Boolean ativo) {
+    public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
-        return this;
     }
 
-    public ParticipanteControleFinanceiro adicionarRenda(TipoRenda tipoRenda, double valorBruto, Boolean ativo){
-        this.rendaLista.add(new Renda(this.getCodigo(), tipoRenda, valorBruto, ativo));
-        return this;
+    public Renda adicionarRenda(TipoRenda tipoRenda, double valorBruto, Boolean ativo){
+        var renda = new Renda(this.getCodigo(), tipoRenda, valorBruto, ativo);
+        this.rendaLista.add(renda);
+        return renda;
     }
+    public CarteiraDigital adicionarCarteiraDigital(InstituicaoFinanceira instituicaoFinanceira){
+        var carteira = new CarteiraDigital(this.getCodigo(), instituicaoFinanceira);
+        this.carteiraDigitalLista.add(carteira);
+        return carteira;
+    }
+
     @Override
     public Dictionary<Integer, String> getAcoes() {
         var data = new Hashtable<Integer, String>();

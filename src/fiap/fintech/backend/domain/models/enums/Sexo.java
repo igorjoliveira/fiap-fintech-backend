@@ -1,4 +1,4 @@
-package fiap.fintech.backend.domain.models;
+package fiap.fintech.backend.domain.models.enums;
 
 public enum Sexo{
     Masculino,

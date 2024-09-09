@@ -1,5 +1,7 @@
 package fiap.fintech.backend.domain.models;
 
+import fiap.fintech.backend.domain.models.enums.TipoRenda;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Dictionary;
