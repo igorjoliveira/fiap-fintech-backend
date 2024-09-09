@@ -20,6 +20,7 @@ public class CarteiraDigital extends BaseModel {
     public int getCodigoParticipanteControleFinanceiro() {
         return codigoParticipanteControleFinanceiro;
     }
+    public List<FormaPagamento> getFormaPagamentoLista() { return formaPagamentoLista; }
 
     public void setAtivo(Boolean ativo) {
         this.ativo = ativo;
@@ -35,6 +36,7 @@ public class CarteiraDigital extends BaseModel {
         this.codigoParticipanteControleFinanceiro = codigoParticipanteControleFinanceiro;
         this.instituicaoFinanceira = instituicaoFinanceira;
         this.setDataHoraCadastro(LocalDateTime.now());
+        this.ativo = true;
     }
 
     public FormaPagamento adicionarCartaoCredito(String numero, String nome, String dataVencimento, String codigoSeguranca){
@@ -59,23 +61,22 @@ public class CarteiraDigital extends BaseModel {
 
     @Override
     public String exibirResumo() {
-        return "";
+        return String.format("Código participante: %d - Banco: %s - Status: %s", this.getCodigoParticipanteControleFinanceiro(), this.getInstituicaoFinanceira(), this.getAtivo());
     }
     @Override
-    public String exibirDetalhado() {
-        return "";
-    }
-    @Override
-    public Dictionary<Integer, String> getAcoes() {
-        var data = new Hashtable<Integer, String>();
-        data.put(1, "Exibir detalhes da carteira digitial");
-        data.put(2, "Listar Formas de pagamento");
-        data.put(3, "Selecionar forma de pagamento");
-        data.put(4, "Adicionar Cartão");
-        data.put(5, "Adicionar Conta");
-        data.put(6, "Adicionar Cheque");
-        data.put(99, "Voltar");
+    public String exibirDetalhe() {
+        var mensagem = String.format("Código participante: %d\n" +
+                "Banco: %s\n" +
+                "Status: %s\n" +
+                "Qtde forma de pagamento: %d\n",
+                this.getCodigoParticipanteControleFinanceiro(),
+                this.getInstituicaoFinanceira(),
+                this.getAtivo(),
+                this.getFormaPagamentoLista().size());
 
-        return data;
+        for(FormaPagamento formaPagamento : this.getFormaPagamentoLista()){
+            mensagem = String.format("%s%s", mensagem, formaPagamento.exibirDetalhe());
+        }
+        return mensagem;
     }
 }

@@ -92,35 +92,23 @@ public class Usuario extends BaseModel {
 
         return mensagem.toString();
     }
-    @Override
-    public Dictionary<Integer, String> getAcoes() {
-        var data = new Hashtable<Integer, String>();
-        data.put(1, "Exibir detalhes usuário");
-        data.put(2, "Listar controle financeiro");
-        data.put(3, "Adicionar controle financeiro");
-        data.put(4, "Remover controle financeiro");
-        data.put(5, "Selecionar controle financeiro");
-        data.put(99, "Sair");
 
-        return data;
-    }
     @Override
     public String exibirResumo() {
         return String.format("Resumo do usuário:\n%d - %s - %s", this.getCodigo(), this.nome, this.sexo);
     }
     @Override
-    public String exibirDetalhado() {
-        var detalhe = new StringBuilder();
-        detalhe.append("Detalhe do usuário:\n")
-                .append("Código: %d\n")
-                .append("Nome completo: %s %s\n")
-                .append("Email: %s\n")
-                .append("Sexo: %s\n")
-                .append("Data de nascimento: %s\n")
-                .append("Autenticador: %s\n")
-                .append("Total de controle financeiro: %d\n");
+    public String exibirDetalhe() {
+        var detalhe = "Detalhe do usuário:\n" +
+                "Código: %d\n" +
+                "Nome completo: %s %s\n" +
+                "Email: %s\n" +
+                "Sexo: %s\n" +
+                "Data de nascimento: %s\n" +
+                "Autenticador: %s\n" +
+                "Total de controle financeiro: %d\n";
 
-        return String.format(detalhe.toString(),
+        return String.format(detalhe,
                 this.getCodigo(),
                 this.nome,
                 this.sobreNome,

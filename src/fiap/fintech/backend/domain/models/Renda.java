@@ -4,7 +4,6 @@ import fiap.fintech.backend.domain.models.enums.TipoRenda;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.List;
 
 public class Renda extends BaseModel {
@@ -51,16 +50,13 @@ public class Renda extends BaseModel {
         this.setDataHoraAtualizacao(LocalDateTime.now());
         return this;
     }
-    @Override
-    public Dictionary<Integer, String> getAcoes() {
-        return null;
-    }
+
     @Override
     public String exibirResumo() {
         return String.format("Codigo: %d - Participante: %d - Tipo renda: %s - Valor bruto R$%.2f - Ativo: %s\n", this.getCodigo(), this.codigoParticipante, this.tipoRenda, this.valorBruto, this.ativo);
     }
     @Override
-    public String exibirDetalhado() {
+    public String exibirDetalhe() {
         var mensagem = new StringBuilder();
         mensagem.append("Codigo: %d\n")
                 .append("Codigo Participante: %d\n")

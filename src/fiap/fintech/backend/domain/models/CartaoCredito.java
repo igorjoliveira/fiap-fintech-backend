@@ -1,7 +1,6 @@
 package fiap.fintech.backend.domain.models;
 
 import java.time.LocalDateTime;
-import java.util.Dictionary;
 
 public class CartaoCredito extends Cartao {
 
@@ -32,7 +31,14 @@ public class CartaoCredito extends Cartao {
         return 'C';
     }
     @Override
-    public Dictionary<Integer, String> getAcoes() {
-        return super.getAcoes();
+    public String exibirDetalhe() {
+        return String.format("%sValor limite R$%.2f\nCódigo Segurança: %s\n",
+                super.exibirDetalhe(),
+                this.getValorLimite(),
+                this.getCodigoSeguranca());
+    }
+    @Override
+    public String exibirResumo() {
+        return super.exibirResumo();
     }
 }

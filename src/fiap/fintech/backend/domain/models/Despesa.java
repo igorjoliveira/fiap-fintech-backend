@@ -1,9 +1,8 @@
 package fiap.fintech.backend.domain.models;
 
 import fiap.fintech.backend.domain.models.enums.CategoriaDespesa;
-
 import java.time.LocalDateTime;
-import java.util.Dictionary;
+import java.time.format.DateTimeFormatter;
 
 public class Despesa extends BaseModel {
 
@@ -41,9 +40,10 @@ public class Despesa extends BaseModel {
         return dataHoraRealizada;
     }
 
-    public Despesa(int codigoParticipante, String descricao, double valor, CategoriaDespesa categoriaDespesa, LocalDateTime dataHoraRealizada) {
+    public Despesa(int codigoParticipante, String descricao, int codigoFormaPagamento, double valor, CategoriaDespesa categoriaDespesa, LocalDateTime dataHoraRealizada) {
         super();
         this.codigoParticipante = codigoParticipante;
+        this.codigoFormaPagamento = codigoFormaPagamento;
         this.descricao = descricao;
         this.valor = valor;
         this.categoriaDespesa = categoriaDespesa;
@@ -51,31 +51,29 @@ public class Despesa extends BaseModel {
         this.parcelado = false;
         this.setDataHoraCadastro(LocalDateTime.now());
     }
-
-    public Despesa setCodigoFormaPagamento(int codigoFormaPagamento){
-        this.codigoFormaPagamento = codigoFormaPagamento;
-        return this;
-    }
-
-    public Despesa setQuantidadeParcela(int quantidadeParcela){
-        if(quantidadeParcela > 0) {
-            this.parcelado = true;
-            this.quantidadeParcela = quantidadeParcela;
-        }
-
-        return this;
+    public Despesa(int codigoParticipante, String descricao, int codigoFormaPagamento, double valor, CategoriaDespesa categoriaDespesa, LocalDateTime dataHoraRealizada, int quantidadeParcela) {
+        this(codigoParticipante, descricao, codigoFormaPagamento, valor, categoriaDespesa, dataHoraRealizada);
+        this.parcelado = true;
+        this.quantidadeParcela = quantidadeParcela;
     }
 
     @Override
     public String exibirResumo() {
-        return "";
+        return String.format("Descrição: %s - Valor: R$%.2f - Categoria: %s", this.getDescricao(), this.getValor(), this.getCategoriaDespesa());
     }
     @Override
-    public String exibirDetalhado() {
-        return "";
-    }
-    @Override
-    public Dictionary<Integer, String> getAcoes() {
-        return null;
+    public String exibirDetalhe() {
+        var mensagem = "Descrição: %s\n" +
+                "Valor: R$%.2f\n" +
+                "Categoria: %s\n" +
+                "Forma de Pagamento: %d\n" +
+                "Data hora compra: %s\n";
+
+        return String.format(mensagem,
+                this.getDescricao(),
+                this.getValor(),
+                this.getCategoriaDespesa(),
+                this.getCodigoFormaPagamento(),
+                this.dataHoraRealizada.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
     }
 }

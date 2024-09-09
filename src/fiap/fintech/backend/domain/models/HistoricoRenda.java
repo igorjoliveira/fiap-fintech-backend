@@ -1,9 +1,7 @@
 package fiap.fintech.backend.domain.models;
 
 import fiap.fintech.backend.domain.models.enums.TipoRenda;
-
 import java.time.LocalDateTime;
-import java.util.Dictionary;
 
 public class HistoricoRenda extends BaseModel {
     private int codigoRenda;
@@ -26,15 +24,11 @@ public class HistoricoRenda extends BaseModel {
     public Boolean getAtivo() { return ativo; }
 
     @Override
-    public Dictionary<Integer, String> getAcoes() {
-        return null;
-    }
-    @Override
     public String exibirResumo() {
         return "";
     }
     @Override
-    public String exibirDetalhado() {
+    public String exibirDetalhe() {
         return "";
     }
 }

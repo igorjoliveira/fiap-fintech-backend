@@ -2,8 +2,6 @@ package fiap.fintech.backend.domain.models;
 
 import fiap.fintech.backend.domain.models.enums.TipoPagamento;
 
-import java.util.Dictionary;
-
 public abstract class FormaPagamento extends BaseModel {
     private int codigoCateiraDigital;
     private TipoPagamento codigoTipoPagamento;
@@ -23,14 +21,14 @@ public abstract class FormaPagamento extends BaseModel {
 
     @Override
     public String exibirResumo() {
-        return "";
+        return String.format("Código Forma Pagamento: %d - Tipo Pagamento: %s\n",
+                this.getCodigoCateiraDigital(),
+                this.getCodigoTipoPagamento());
     }
     @Override
-    public String exibirDetalhado() {
-        return "";
-    }
-    @Override
-    public Dictionary<Integer, String> getAcoes() {
-        return null;
+    public String exibirDetalhe() {
+        return String.format("Código Forma Pagamento: %s\n" + "Tipo Pagamento: %s\n",
+                this.getCodigo(),
+                this.getCodigoTipoPagamento());
     }
 }

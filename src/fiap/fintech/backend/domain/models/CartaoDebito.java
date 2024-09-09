@@ -1,7 +1,5 @@
 package fiap.fintech.backend.domain.models;
 
-import java.util.Dictionary;
-
 public class CartaoDebito extends Cartao {
     public CartaoDebito(int codigoCateiraDigital, String numero, String nome, String dataVencimento) {
         super(codigoCateiraDigital, numero, nome, dataVencimento);
@@ -12,7 +10,11 @@ public class CartaoDebito extends Cartao {
         return 'D';
     }
     @Override
-    public Dictionary<Integer, String> getAcoes() {
-        return super.getAcoes();
+    public String exibirDetalhe() {
+        return super.exibirDetalhe();
+    }
+    @Override
+    public String exibirResumo() {
+        return super.exibirResumo();
     }
 }
